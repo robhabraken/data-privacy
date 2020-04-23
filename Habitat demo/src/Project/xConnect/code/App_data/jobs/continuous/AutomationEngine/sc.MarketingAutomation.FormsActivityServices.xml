@@ -1,0 +1,20 @@
+﻿<Settings>
+  <!--
+    Marketing Automation Activity Services configuration
+  -->
+  <Sitecore>
+    <XConnect>
+      <MarketingAutomation>
+        <Engine>
+          <Services>
+            <FormsExtension.DataManagementService>
+              <Type>Sitecore.Weareyou.Feature.FormsExtension.Activities.DataManagementService, Sitecore.Weareyou.Feature.FormsExtension</Type>
+              <As>Sitecore.Weareyou.Feature.FormsExtension.Activities.IDataManagementService, Sitecore.Weareyou.Feature.FormsExtension</As>
+              <LifeTime>Singleton</LifeTime>
+            </FormsExtension.DataManagementService>
+          </Services>
+        </Engine>
+      </MarketingAutomation>
+    </XConnect>
+  </Sitecore>
+</Settings>

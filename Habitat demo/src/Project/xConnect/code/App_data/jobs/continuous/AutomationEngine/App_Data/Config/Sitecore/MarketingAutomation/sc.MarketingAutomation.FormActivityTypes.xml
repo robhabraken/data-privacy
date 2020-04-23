@@ -1,0 +1,20 @@
+<Settings>
+    <!--
+      Marketing Automation activity type registration.
+    -->
+    <Sitecore>
+        <XConnect>
+            <Services>
+                <MarketingAutomation.Activity.EraseFormSubmissionsActivity>
+                    <Type>Sitecore.Xdb.MarketingAutomation.Locator.ActivityTypeRegistration, Sitecore.Xdb.MarketingAutomation</Type>
+                    <LifeTime>Singleton</LifeTime>
+                    <Options>
+                        <Id>{1CBACBF2-E240-4602-BEA4-80DF19787D7C}</Id>
+                        <ImplementationType>Sitecore.Weareyou.Feature.FormsExtension.Activities.EraseFormSubmissions, Sitecore.Weareyou.Feature.FormsExtension</ImplementationType>
+                    </Options>
+                </MarketingAutomation.Activity.EraseFormSubmissionsActivity>
+            </Services>
+        </XConnect>
+    </Sitecore>
+</Settings>
+ 

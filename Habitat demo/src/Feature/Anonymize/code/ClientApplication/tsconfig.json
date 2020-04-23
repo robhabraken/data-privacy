@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "allowJs": true,
+        "target": "es5",
+        "module": "es2015",
+        "moduleResolution": "node",
+        "removeComments": true,
+        "sourceMap": true,
+        "outDir": "../codegen",
+        "rootDir": "../",
+        "lib": [
+            "es2016",
+            "dom"
+        ]
+    },
+    "exclude": [
+        "**/*.spec.ts",
+        "test.ts"
+    ],
+    "files": [
+        "anonymize-contact/anonymize-contact-module.ts"
+    ],
+    "angularCompilerOptions": {
+        "genDir": "../codegen",
+        "skipMetadataEmit": true,
+        "generateCodeForLibraries": true
+    }
+}

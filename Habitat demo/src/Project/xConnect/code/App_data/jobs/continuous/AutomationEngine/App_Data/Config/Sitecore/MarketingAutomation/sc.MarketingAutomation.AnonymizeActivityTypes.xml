@@ -1,0 +1,20 @@
+<Settings>
+    <!--
+      Marketing Automation activity type registration.
+    -->
+    <Sitecore>
+        <XConnect>
+            <Services>
+                <MarketingAutomation.Activity.AnonymizeActivity>
+                    <Type>Sitecore.Xdb.MarketingAutomation.Locator.ActivityTypeRegistration, Sitecore.Xdb.MarketingAutomation</Type>
+                    <LifeTime>Singleton</LifeTime>
+                    <Options>
+                        <Id>{EEDD833D-25CD-412A-91F9-C33BFE7D56D6}</Id>
+                        <ImplementationType>Sitecore.Weareyou.Feature.Anonymize.Activities.AnonymizeContact, Sitecore.Weareyou.Feature.Anonymize</ImplementationType>
+                    </Options>
+                </MarketingAutomation.Activity.AnonymizeActivity>
+            </Services>
+        </XConnect>
+    </Sitecore>
+</Settings>
+ 

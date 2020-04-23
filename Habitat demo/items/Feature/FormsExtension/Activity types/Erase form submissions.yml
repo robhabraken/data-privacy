@@ -1,0 +1,41 @@
+﻿---
+ID: "1cbacbf2-e240-4602-bea4-80df19787d7c"
+Parent: "2df0885c-7154-470d-b5cf-275b84b24248"
+Template: "b00d58aa-b884-4641-a4fc-5c4aca49d553"
+Path: /sitecore/system/Settings/Analytics/Marketing Automation/Activity Types/Erase form submissions
+DB: master
+SharedFields:
+- ID: "7615a1f6-281d-4f49-8e68-c7f0f4a7ad34"
+  Hint: Implementation Type
+  Value: Sitecore.Weareyou.Feature.FormsExtension.Activities.EraseFormSubmissions, Sitecore.Weareyou.Feature.FormsExtension
+- ID: "b7b5336a-cc53-4b18-80a8-300e2b753b85"
+  Hint: Icon
+  Value: OfficeWhite/32x32/text_field.png
+- ID: "f6d8a61c-2f84-4401-bd24-52d2068172bc"
+  Hint: __Originator
+  Value: "{4FA4ACBB-04CB-46E7-BA54-09A4D38FD8DE}"
+Languages:
+- Language: en
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200204T151138Z
+    - ID: "63d0893e-5450-4808-92d7-b72b1238e5ec"
+      Hint: Name
+      Value: Erase form submissions
+- Language: "nl-NL"
+  Versions:
+  - Version: 1
+    Fields:
+    - ID: "25bed78c-4957-4165-998a-ca1b52f67497"
+      Hint: __Created
+      Value: 20200106T095740Z
+    - ID: "5dd74568-4d4b-44c1-b513-0af5f4cda34f"
+      Hint: __Created by
+      Value: |
+        sitecore\Admin
+    - ID: "63d0893e-5450-4808-92d7-b72b1238e5ec"
+      Hint: Name
+      Value: Anonymize contact

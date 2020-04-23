@@ -1,0 +1,32 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "angular-cli": {},
+  "scripts": {
+    "build": "ngc -p ./ClientApplication/tsconfig.json && webpack --mode=development --display-error-details"
+  },
+  "dependencies": {
+    "@angular/common": "5.2.11",
+    "@angular/compiler": "7.2.4",
+    "@angular/compiler-cli": "^7.2.4",
+    "@angular/core": "5.2.11",
+    "@angular/forms": "5.2.11",
+    "@angular/http": "5.2.11",
+    "@angular/platform-browser": "5.2.11",
+    "@ngx-translate/core": "^9.0.2",
+    "@sitecore/ma-core": "file:C:/inetpub/wwwroot/habitathomecorporate.dev.local/sitecore/shell/client/Applications/MarketingAutomation/packages/ma-core",
+    "rxjs": "^5.5.11",
+    "typescript": "3.2.4",
+    "zone.js": "^0.8.4"
+  },
+  "devDependencies": {
+    "ts-loader": "^5.3.3",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3"
+  },
+  "main": "index.js",
+  "author": "",
+  "license": "ISC"
+}
