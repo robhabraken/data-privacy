@@ -13,7 +13,6 @@ A new (custom) activity type for Marketing Automation plans to erase form submis
 _See the 'Sitecore modules' folder for an installable Sitecore module (and don't forget to deploy the required files from the separate xConnect archive to your xConnect role; also note that you need to add the connection string for the forms database to your xConnect deployment as well) and the Habitat demo for the actual code examples. You can use the same Helix Feature in your own project and further customize it to your liking._
 
 ## License info
----
 **MIT License**\
 Copyright (c) 2020 We are you, the Netherlands
 
