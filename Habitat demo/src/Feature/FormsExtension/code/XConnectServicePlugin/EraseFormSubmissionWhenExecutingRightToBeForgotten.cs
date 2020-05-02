@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Extensions.Logging;
 using Sitecore.Framework.Conditions;
 using Sitecore.Weareyou.Feature.FormsExtension.Activities;
+using Sitecore.Weareyou.Feature.FormsExtension.Processing.Actions;
 using Sitecore.XConnect;
 using Sitecore.XConnect.Operations;
 using Sitecore.XConnect.Service.Plugins;
@@ -82,7 +84,15 @@ namespace Sitecore.Weareyou.Feature.FormsExtension.XConnectServicePlugin
                 if (contactId.HasValue)
                 {
                     _logger.LogDebug($"[{PluginName}] Starting erasing {contactId.Value} contact records from Forms database");
-                    DataManagementService.DeleteFormEntries(contactId.Value);
+                    var identifier = entity.Identifiers
+                        .FirstOrDefault(i => i.Source.Equals(SaveDataWithContact.TrackerIdFieldName));
+                    if(identifier != null) { 
+                        if (Guid.TryParse(identifier?.Identifier, out var id))
+                        {
+                            DataManagementService.DeleteFormEntries(id);
+                        }
+                    }
+                    
                     _logger.LogDebug($"[{PluginName}] Erasing {contactId.Value} contact records from Forms database was finished");
                 }
             }
