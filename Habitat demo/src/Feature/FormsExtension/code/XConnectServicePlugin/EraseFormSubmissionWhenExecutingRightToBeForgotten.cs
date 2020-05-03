@@ -22,14 +22,19 @@ namespace Sitecore.Weareyou.Feature.FormsExtension.XConnectServicePlugin
     public class EraseFormSubmissionWhenExecutingRightToBeForgotten : IXConnectServicePlugin, IDisposable
     {
         private const string PluginName = "EraseFormSubmissionWhenExecutingRightToBeForgotten";
-        private XdbContextConfiguration _configuration;
-        private readonly ILogger _logger;
+
+        private XdbContextConfiguration configuration;
+
+        private readonly ILogger logger;
+
         private IDataManagementService DataManagementService { get; set; }
-        public EraseFormSubmissionWhenExecutingRightToBeForgotten(ILogger<EraseFormSubmissionWhenExecutingRightToBeForgotten> logger)
+
+        public EraseFormSubmissionWhenExecutingRightToBeForgotten(ILogger logger)
         {
             DataManagementService = new DataManagementService();
-            _logger = logger;
+            this.logger = logger;
         }
+
         public void Dispose()
         {
             GC.SuppressFinalize(this);
@@ -41,30 +46,35 @@ namespace Sitecore.Weareyou.Feature.FormsExtension.XConnectServicePlugin
         /// <param name="config">XdbContextConfiguration</param>
         public void Register(XdbContextConfiguration config)
         {
-            _configuration = Condition.Requires(config, "config").IsNotNull().Value;
-            _configuration.OperationAdded += OnOperationAdded;
+            configuration = Condition.Requires(config, "config").IsNotNull().Value;
+
+            configuration.OperationAdded += OnOperationAdded;
         }
 
         private void OnOperationAdded(object sender, XdbOperationEventArgs xdbOperationEventArgs)
         {
             Condition.Requires(xdbOperationEventArgs, "xdbOperationEventArgs").IsNotNull();
+
             RightToBeForgottenOperation rightToBeForgottenOperation;
-            if ((rightToBeForgottenOperation = (xdbOperationEventArgs.Operation as RightToBeForgottenOperation)) != null)
+            if ((rightToBeForgottenOperation = (xdbOperationEventArgs.Operation as RightToBeForgottenOperation)) == null)
             {
-                if (rightToBeForgottenOperation.Status == XdbOperationStatus.Canceled)
-                {
-                    _logger.LogDebug($"[{PluginName}] Skipping operation as it has been cancelled");
-                }
-                else
-                {
-                    rightToBeForgottenOperation.DependencyAdded += OnDependencyAddedToRightToBeForgottenOperation;
-                }
+                return;
+            }
+
+            if (rightToBeForgottenOperation.Status == XdbOperationStatus.Canceled)
+            {
+                logger.LogDebug($"[{PluginName}] Skipping operation as it has been cancelled");
+            }
+            else
+            {
+                rightToBeForgottenOperation.DependencyAdded += OnDependencyAddedToRightToBeForgottenOperation;
             }
         }
 
         private void OnDependencyAddedToRightToBeForgottenOperation(object sender, DependencyAddedEventArgs args)
         {
             Condition.Requires(args, "args").IsNotNull();
+
             GetEntityOperation<Contact> getEntityOperation;
             if ((getEntityOperation = (args.Predecessor as GetEntityOperation<Contact>)) != null)
             {
@@ -76,31 +86,34 @@ namespace Sitecore.Weareyou.Feature.FormsExtension.XConnectServicePlugin
         {
             Condition.Requires(sender, "sender").IsNotNull();
             Condition.Requires(args, "args").IsNotNull();
+
             GetEntityOperation<Contact> getEntityOperation;
-            if ((getEntityOperation = (sender as GetEntityOperation<Contact>)) != null && args.NewStatus == XdbOperationStatus.Succeeded)
+            if ((getEntityOperation = (sender as GetEntityOperation<Contact>)) == null ||
+                args.NewStatus != XdbOperationStatus.Succeeded)
             {
-                var entity = getEntityOperation.Entity;
-                var contactId = entity.Id;
-                if (contactId.HasValue)
-                {
-                    _logger.LogDebug($"[{PluginName}] Starting erasing {contactId.Value} contact records from Forms database");
-                    var identifier = entity.Identifiers
-                        .FirstOrDefault(i => i.Source.Equals(SaveDataWithContact.TrackerIdFieldName));
-                    if(identifier != null) { 
-                        if (Guid.TryParse(identifier?.Identifier, out var id))
-                        {
-                            DataManagementService.DeleteFormEntries(id);
-                        }
-                    }
-                    
-                    _logger.LogDebug($"[{PluginName}] Erasing {contactId.Value} contact records from Forms database was finished");
-                }
+                return;
             }
+
+            var contact = getEntityOperation.Entity;
+            var contactId = contact.Id.GetValueOrDefault().ToString();
+            logger.LogDebug($"[{PluginName}] Starting erasing {contactId} contact records from Forms database");
+
+            // get the tracker id to match up with the form entry bc xconnect and tracker id are not the same
+            const string source = SaveDataWithContact.TrackerIdFieldName;
+            var identifier = contact.Identifiers.FirstOrDefault(i => i.Source.Equals(source))?.Identifier;
+                
+            if (identifier != null)
+            {
+                var trackerId = new Guid(identifier);
+                DataManagementService.DeleteFormEntries(trackerId);
+            }
+                    
+            logger.LogDebug($"[{PluginName}] Erasing {contactId} contact records from Forms database was finished");
         }
 
         public void Unregister()
         {
-            _configuration.OperationAdded -= OnOperationAdded;
+            configuration.OperationAdded -= OnOperationAdded;
         }
     }
 }
