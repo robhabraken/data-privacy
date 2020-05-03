@@ -7,8 +7,13 @@ A new (custom) activity type for Marketing Automation plans to execute the right
 
 _See the 'Sitecore modules' folder for an installable Sitecore module (and don't forget to deploy the required files from the separate xConnect archive to your xConnect role) and the Habitat demo for the actual code examples. You can use the same Helix Feature in your own project and further customize it to your liking._
 
-## Automatic data disposal for saved Form data
+## Disposal of saved Form data for Marketing Automation plans
 A new (custom) activity type for Marketing Automation plans to erase form submission data stored in the ExperienceForms database, named 'EraseFormSubmissions'. This activity type requires a custom submit action for Sitecore Forms, which is also included in the module, that stores the xDB.Tracker ID as a hidden field in each form submission, to be able to establish a connection between a Contact and a FormEntry. Be aware that if used together with the AnonymizeContact marketing action, you should perform this action first, as the other one would erase the xDB.Tracker ID by executing the right to be forgotten, effectively removing the connection between the contact and all its form entries.
+
+## Automatic disposal of saved Form data upon executing the Right to be Forgotten
+Thanks to the contribution of @Antonytm this repository now contains an xConnect service plugin that automatically erases form submission data of a contact upon executing the right to be forgotten. It does not matter how this method is initiated, either from the dashboard of an Experience Profile, via the marketion action 'AnonymizeContact' as included in this repository, or via custom code. This addition allows you to only use the 'AnonymizeContact' action in a marketing automation plan, without the need of adding the 'EraseFormSubmissions' action as well. But more importantly, it ensures that your form data is cleaned up regardless of the method being used. This functionality is included in the 2.0 version of the installable EraseFormSubmissions module, as well as in the Habitat demo project.
+
+Having this service plugin doesn't render the 'EraseFormSubmissions' action useless, as you can still use that in other scenarios like in a marketing automation plan for specific campaigns, or when your form entries have a shorter retention period than your general privacy policy states.
 
 _See the 'Sitecore modules' folder for an installable Sitecore module (and don't forget to deploy the required files from the separate xConnect archive to your xConnect role; also note that you need to add the connection string for the forms database to your xConnect deployment as well) and the Habitat demo for the actual code examples. You can use the same Helix Feature in your own project and further customize it to your liking._
 
