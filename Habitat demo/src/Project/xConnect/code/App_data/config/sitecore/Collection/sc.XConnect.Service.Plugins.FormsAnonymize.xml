@@ -4,7 +4,7 @@
       <Collection>
         <Services>
           <EraseFormSubmissionWhenExecutingRightToBeForgotten>
-            <Type>Sitecore.Weareyou.Feature.FormsExtension.XConnectServicePlugin.EraseFormSubmissionWhenExecutingRightToBeForgotten, Sitecore.Weareyou.Feature.FormsExtension</Type>
+            <Type>Sitecore.Weareyou.Feature.FormsExtension.XConnectServicePlugin.EraseFormSubmissionsWhenExecutingRightToBeForgotten, Sitecore.Weareyou.Feature.FormsExtension</Type>
             <As>Sitecore.XConnect.Service.Plugins.IXConnectServicePlugin, Sitecore.XConnect.Service.Plugins</As>
             <LifeTime>Singleton</LifeTime>
           </EraseFormSubmissionWhenExecutingRightToBeForgotten>
