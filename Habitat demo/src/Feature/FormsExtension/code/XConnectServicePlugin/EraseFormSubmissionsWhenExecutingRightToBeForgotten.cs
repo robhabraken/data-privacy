@@ -21,7 +21,7 @@ namespace Sitecore.Weareyou.Feature.FormsExtension.XConnectServicePlugin
     /// To enable it you need to copy the accompanying XML configuration to \App_Data\Config\Sitecore\Collection of your xConnect deployment.
     /// Configuration is located at Project\xConnect\code\App_data\config\sitecore\Collection\sc.XConnect.Service.Plugins.FormsAnonymize.xml in this repository.
     /// </remarks>
-    public class EraseFormSubmissionWhenExecutingRightToBeForgotten : IXConnectServicePlugin, IDisposable
+    public class EraseFormSubmissionsWhenExecutingRightToBeForgotten : IXConnectServicePlugin, IDisposable
     {
         private const string PluginName = "EraseFormSubmissionWhenExecutingRightToBeForgotten";
 
@@ -31,7 +31,7 @@ namespace Sitecore.Weareyou.Feature.FormsExtension.XConnectServicePlugin
 
         private IDataManagementService DataManagementService { get; set; }
 
-        public EraseFormSubmissionWhenExecutingRightToBeForgotten(ILogger logger)
+        public EraseFormSubmissionsWhenExecutingRightToBeForgotten(ILogger logger)
         {
             DataManagementService = new DataManagementService();
             this.logger = logger;

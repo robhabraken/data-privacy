@@ -132,7 +132,7 @@
     <Compile Include="Activities\DataManagementService.cs" />
     <Compile Include="Processing\Actions\SaveDataWithContact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="XConnectServicePlugin\EraseFormSubmissionWhenExecutingRightToBeForgotten.cs" />
+    <Compile Include="XConnectServicePlugin\EraseFormSubmissionsWhenExecutingRightToBeForgotten.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
