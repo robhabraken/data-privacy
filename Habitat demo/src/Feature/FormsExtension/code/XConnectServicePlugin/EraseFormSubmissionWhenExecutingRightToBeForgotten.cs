@@ -11,14 +11,16 @@ using Sitecore.XConnect.Service.Plugins;
 namespace Sitecore.Weareyou.Feature.FormsExtension.XConnectServicePlugin
 {
     /// <summary>
-    /// Implementation was inspired by Sitecore.EmailCampaign.XConnect.Operations.ClearSupressionListWhenExecutingRightToBeForgotten
-    /// XConnect service plugin that clears forms data on executing right to be forgotten
-    /// Makes Sitecore Forms to be GDPR compliant
-    /// e.g. Sitecore > xProfile > Any contact > Action > Anonymize
-    ///
-    /// To enable it you need to copy XML configuration to sc93xconnect.dev.local\App_Data\Config\Sitecore\Collection
-    /// Configuration is present in this repository Project\xConnect\code\App_data\config\sitecore\Collection\sc.XConnect.Service.Plugins.FormsAnonymize.xml
+    /// xConnect service plugin that clears Form submissions automatically upon executing the right to be forgotten.
+    /// Helps in making Sitecore Forms implementations to be GDPR compliant / compliant with your privacy policy.
     /// </summary>
+    /// <remarks>
+    /// Implementation inspired by Sitecore.EmailCampaign.XConnect.Operations.ClearSupressionListWhenExecutingRightToBeForgotten.
+    /// This implementation shares the DataManagementService of the custom EraseFormSubmission marketing activity and requires the custom SaveDataWithContact
+    /// Forms submit action to establish the link between a Contact and his Form Entries.
+    /// To enable it you need to copy the accompanying XML configuration to \App_Data\Config\Sitecore\Collection of your xConnect deployment.
+    /// Configuration is located at Project\xConnect\code\App_data\config\sitecore\Collection\sc.XConnect.Service.Plugins.FormsAnonymize.xml in this repository.
+    /// </remarks>
     public class EraseFormSubmissionWhenExecutingRightToBeForgotten : IXConnectServicePlugin, IDisposable
     {
         private const string PluginName = "EraseFormSubmissionWhenExecutingRightToBeForgotten";
@@ -40,10 +42,6 @@ namespace Sitecore.Weareyou.Feature.FormsExtension.XConnectServicePlugin
             GC.SuppressFinalize(this);
         }
 
-        /// <summary>
-        /// Subscribes  to events
-        /// </summary>
-        /// <param name="config">XdbContextConfiguration</param>
         public void Register(XdbContextConfiguration config)
         {
             configuration = Condition.Requires(config, "config").IsNotNull().Value;
