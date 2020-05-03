@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<connectionStrings xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <add name="experienceforms" connectionString="your_connection_string" xdt:Locator="Match(name)" xdt:Transform="InsertIfMissing" />
+</connectionStrings>
